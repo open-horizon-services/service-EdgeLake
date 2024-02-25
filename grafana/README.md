@@ -1,22 +1,23 @@
-# Grafana
+# Importing AnyLog related dashboards into Grafana
 
-Grafana is an open-source BI tool managed by [Grafana Labs](https://grafana.com/). We utilize Grafana as our default 
-demo BI tool. For details documentation of how to use Grafana, please visit our [official documentation](https://github.com/AnyLog-co/documentation/blob/master/northbound%20connectors/using%20grafana.md)
+Instruction to create and manage your Grafana instance with AnyLog, can be found in AnyLog's [official documentation](https://github.com/AnyLog-co/documentation/blob/master/northbound%20connectors/using%20grafana.md).
 
-Using Grafana, users can visualize time series data using pre-defined queries and add new queries using SQL.
 
-By default, this repository provides 3 base models for users to start with:
-* [Network Map](network_summary.json) - The dashboard consists of a map showing the location of all the nodes in the 
-network, as well as a list of tables and operators that are part of the network.
+The following document provides 3 sample Grafana dashboards
+* [Network Map](network_summary.json) - The dashboard consists of a map showing all the nodes in the network, a list of 
+the operator nodes and a list of the table supported in the network.
 ![grafana_network_map.png](..%2Fimgs%2Fgrafana_network_map.png)
 
 
-* [Kubernetes Alert](kubearmor_alert.json) - A dashboard demonstration (Alert) events seen by Kubearmor
+* [Kubernetes Alert](kubearmor_alert.json) - A dashboard representing alerts from kubearmor-relay. The use case is detailed in 
+[integration wiki page](https://wiki.lfedge.org/display/OH/AnyLog+-+KubeArmor+Integration). 
 ![grafana_alert.png](..%2Fimgs%2Fgrafana_alert.png)
 
 
-* [Kubernetes Log](kubearmor_log.json) - A dashboard demonstrating (Log) events seen by Kubearmor
+* [Kubernetes Log](kubearmor_log.json) - A dashboard representing logs from kubearmor-relay
 ![grafana_log.png](..%2Fimgs%2Fgrafana_log.png)
+
+Directions for deploying KubeArmor with AnyLog can be found [here](../AnyLog_Kubearmor.md)
 
 ## Setting Up Grafana
 
@@ -36,8 +37,11 @@ docker run --name=grafana \
   -it -d -p 3000:3000 --rm grafana/grafana:9.5.16
 ```
 
-* Log into Grafana and Declare a _(JSON) Data Source_
-  1. [Login to Grafana](https://grafana.com/docs/grafana/latest/getting-started/getting-started/) - The default HTTP port that AnyLog GUI listens to is 3000 - On a local machine go to ```http://localhost:3000/```.
+Log into Grafana and Declare a _(JSON) Data Source_
+
+1. [Login to Grafana](https://grafana.com/docs/grafana/latest/getting-started/getting-started/) - The default Grafana HTTP port is 3000  
+   * URL: http://localhost:3000/ 
+   * username: admin | password: admin
 
 <img src="../imgs/grafana_login.png" alt="Grafana page" width="50%" height="50%" />
 
@@ -74,7 +78,7 @@ docker run --name=grafana \
 
 5. For each of the widgets update the following information:
 
-<img src="../imgs/grafana_edit_button.png" alt="Edit Widget" width="75%" height="75%" />
+<img src="../imgs/grafana_edit_button.png" alt="Edit Widget" width="50%" height="50%" />
 
 * Data Source 
 
