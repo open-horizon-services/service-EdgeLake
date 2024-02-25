@@ -1,6 +1,6 @@
 # Importing AnyLog related dashboards into Grafana
 
-Instruction to create and manage your Grafana instance with AnyLog, can be found in AnyLog's [official documentation](https://github.com/AnyLog-co/documentation/blob/master/northbound%20connectors/using%20grafana.md).
+Instructions to create and manage your Grafana instance with AnyLog, can be found in AnyLog's [official documentation](https://github.com/AnyLog-co/documentation/blob/master/northbound%20connectors/using%20grafana.md).
 
 
 The following document provides 3 sample Grafana dashboards
