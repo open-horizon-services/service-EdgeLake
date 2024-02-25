@@ -14,10 +14,10 @@ operator nodes and a list of  tables supported in the network.
 ![grafana_alert.png](..%2Fimgs%2Fgrafana_alert.png)
 
 
-* [Kubernetes Log](kubearmor_log.json) - A dashboard representing logs from kubearmor-relay
+* [Kubernetes Log](kubearmor_log.json) - A dashboard representing logs from kubearmor-relay.
 ![grafana_log.png](..%2Fimgs%2Fgrafana_log.png)
 
-Directions for deploying KubeArmor with AnyLog can be found [here](../AnyLog_Kubearmor.md)
+Directions for deploying KubeArmor with AnyLog can be found [here](../AnyLog_Kubearmor.md).
 
 ## Setting Up Grafana
 
@@ -48,9 +48,8 @@ Log into Grafana and Declare a _(JSON) Data Source_
 2. In _Data Sources_ section, create a new JSON data source
    * select a JSON data source.
    * On the name tab provide a unique name to the connection.
-   * On the URL Tab add the REST address offered by the AnyLog node (i.e. http://10.0.0.25:2049)
-   * On the ***Custom HTTP Headers***, name the default database. If no header is set, then all accessible databases to 
-   the node will be available to query
+   * On the URL tab add the REST address offered by the AnyLog node (i.e. http://10.0.0.25:2049)
+   * On the ***Custom HTTP Headers***, name the default database. If no header is set, then all AnyLog hosted databases will be available to a query process.
 
 
 |<img src="../imgs/grafana_datasource_connector.png" alt="Data Source Option" /> | <img src="../imgs/grafana_datasource_configuration.png" alt="Data Source Config" /> | 
@@ -63,12 +62,13 @@ Log into Grafana and Declare a _(JSON) Data Source_
 <img src="../imgs/grafana_base_dashboard.png" alt="Empty Dashboard" />
 
 
-2. Go _JSON Model_ and add desired model
+2. Go _JSON Model_ and add desired model - A model is the JSON object being used to generate the grafana dashboard (for example: [Kubernetes Alert](kubearmor_alert.json)).
 
 | <img src="../imgs/grafana_json_model_empty.png" alt="Empty JSON Model" width="75%" height="75%" /> | <img src="../imgs/grafana_json_model.png" alt="JSON Model" width="75%" height="75%"/> |
 |:--------------------------------------------------------------------------------------------------:|:-------------------------------------------------------------------------------------:|
 
-3. Save Changes 
+3. Save Changes
+
 
 4. Once the changes are saved, you should see a new Dashboard 
 
@@ -77,17 +77,11 @@ Log into Grafana and Declare a _(JSON) Data Source_
 | <img src="../imgs/grafana_no_dashboard.png" alt="No Dashboards" /> | <img src="../imgs/grafana_new_dashboard.png" alt="New Dashboard" /> | 
 
 5. For each of the widgets update the following information:
+   * Data Source 
+   * Metric value (AnyLog table name)
 
-<img src="../imgs/grafana_edit_button.png" alt="Edit Widget" width="50%" height="50%" />
+Once these changes are saved, the outcome should look something like this:
 
-* Data Source 
-
-![grafana_update_datasource.png](..%2Fimgs%2Fgrafana_update_datasource.png)
-
-* Metric value (AnyLog table name)
-
-![grafana_update_table.png](..%2Fimgs%2Fgrafana_update_table.png)
-
-Once these changes are saved, the outcome should look something like this: 
-![grafana_outcome.png](..%2Fimgs%2Fgrafana_outcome.png)
-
+|          View when accessing Dashboard          | Update Data Source | Update Metric Value | Outcome | 
+|:-----------------------------------------------:| :---: | :---: | :---:  |
+| ![Edit Widget](../imgs/grafana_edit_button.png) | ![grafana_update_datasource.png](..%2Fimgs%2Fgrafana_update_datasource.png) | ![grafana_update_table.png](..%2Fimgs%2Fgrafana_update_table.png) | ![grafana_outcome.png](..%2Fimgs%2Fgrafana_outcome.png) |   
