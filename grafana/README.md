@@ -5,7 +5,7 @@ Instructions to create and manage your Grafana instance with AnyLog, can be foun
 
 The following document provides 3 sample Grafana dashboards
 * [Network Map](network_summary.json) - The dashboard consists of a map showing all the nodes in the network, a list of 
-the operator nodes and a list of the table supported in the network.
+operator nodes and a list of  tables supported in the network.
 ![grafana_network_map.png](..%2Fimgs%2Fgrafana_network_map.png)
 
 
