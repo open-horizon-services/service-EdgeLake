@@ -1,0 +1,69 @@
+{
+    "label": "$SERVICE_NAME Deployment Policy",      
+    "description": "Policy to auto deploy $SERVICE_NAME",
+    "service": {       
+      "name": "$SERVICE_NAME",
+      "org": "$HZN_ORG_ID",    
+      "arch": "*",    
+      "serviceVersions": [ 
+        {
+          "version": "$SERVICE_VERSION",
+          "priority":{}
+        }
+      ]
+    },
+    "properties": [
+    ],
+    "constraints": [ 
+         "purpose == automation",
+         "openhorizon.allowPrivileged == true"
+    ], 
+    "userInput": [ 
+      {            
+        "serviceOrgid": "$HZN_ORG_ID",
+        "serviceUrl": "$SERVICE_NAME",
+        "serviceVersionRange": "[0.0.0,INFINITY)",
+        "inputs": [
+          {"name":"NODE_TYPE","value":"operator"},
+          {"name":"NODE_NAME","value":"edgelake-operator"},
+          {"name":"COMPANY_NAME","value":"New Company"},
+
+          {"name":"ANYLOG_SERVER_PORT","value":"32148"},
+          {"name":"ANYLOG_REST_PORT","value":"32149"},
+          {"name":"ANYLOG_BROKER_PORT","value":""},
+          {"name":"TCP_BIND","value":"false"},
+          {"name":"REST_BIND","value":"false"},
+          {"name":"BROKER_BIND_BIND","value":"false"},
+
+          {"name":  "DB_TYPE", "value":  "sqlite"},
+          {"name":  "DB_USER", "value":  ""},
+          {"name":  "DB_PASSWD", "value":  ""},
+          {"name":  "DB_IP", "value":  "127.0.0.1"},
+          {"name":  "DB_PORT", "value":  "5432"},
+          {"name":  "AUTOCOMMIT", "value":  "false"},
+
+          {"name":"LEDGER_CONN","value":"127.0.0.1:32048"},
+
+          {"name":"CLUSTER_NAME","value":"new-company-cluster1"},
+          {"name":"DEFAULT_DBMS","value":"new-cluster"},
+
+          {"name":"ENABLE_MQTT","value":"false"},
+          {"name":"MQTT_BROKER","value":"139.144.46.246"},
+          {"name":"MQTT_PORT","value":"1883"},
+          {"name":"MQTT_USER","value":"anyloguser"},
+          {"name":"MQTT_PASSWD","value":"mqtt4AnyLog!"},
+
+          {"name":"MQTT_LOG","value":"false"},
+          {"name":"MSG_TOPIC","value":"anylog-demo"},
+          {"name":"MSG_DBMS","value":"new_company"},
+          {"name":"MSG_TABLE","value":"bring [table]"},
+          {"name":"MSG_TIMESTAMP_COLUMN","value":"bring [timestamp]"},
+          {"name":"MSG_VALUE_COLUMN","value":"bring [value]"},
+          {"name":"MSG_VALUE_COLUMN_TYPE","value":"float"},
+
+          {"name":"DEPLOY_LOCAL_SCRIPT","value":"false"}
+
+        ]
+      }
+    ]
+}  

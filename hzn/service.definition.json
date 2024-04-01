@@ -1,0 +1,239 @@
+{
+	"org": "$HZN_ORG_ID",
+	"label": "$SERVICE_NAME for $ARCH",
+	"description": "A service to deploy EdgeLake with Open Horizon",
+	"documentation": "https://github.com/open-horizon-services/service-edgelake/",
+	"url": "$SERVICE_NAME",
+	"version": "$SERVICE_VERSION",
+	"arch": "$ARCH",
+	"public": true,
+	"sharable": "singleton",
+	"requiredServices": [],
+	"userInput": [
+		{
+			"name": "INIT_TYPE",
+			"label": "Whether to deploy AnyLog or shell as a docker container",
+			"type": "string",
+			"defaultValue": "prod"
+		},
+		{
+			"name": "NODE_TYPE",
+			"label": "Information regarding which AnyLog node configurations to enable. By default, even if everything is disabled, AnyLog starts TCP and REST connection protocols",
+			"type": "string",
+			"defaultValue": "generic"
+		},
+		{
+			"name": "NODE_NAME",
+			"label": "Name of the AnyLog instance",
+			"type": "string",
+			"defaultValue": "anylog-node"
+		},
+		{
+			"name": "COMPANY_NAME",
+			"label": "Owner of the AnyLog instance",
+			"type": "string",
+			"defaultValue": "New Company"
+		},
+
+		{
+			"name": "ANYLOG_SERVER_PORT",
+			"label": "Port address used by AnyLog's TCP protocol to communicate with other nodes in the network",
+			"type": "int",
+			"defaultValue": "32548"
+		},
+		{
+			"name": "ANYLOG_REST_PORT",
+			"label": "Port address used by AnyLog's REST protocol",
+			"type": "int",
+			"defaultValue": "32549"
+		},
+		{
+			"name": "ANYLOG_BROKER_PORT",
+			"label": "Port address used by AnyLog's Message protocol",
+			"type": "int",
+			"defaultValue": ""
+		},
+		{
+			"name": "TCP_BIND",
+			"label": "A bool value that determines if to bind to a specific IP and Port (a false value binds to all IPs)",
+			"type": "bool",
+			"defaultValue": "false"
+		},
+		{
+			"name": "REST_BIND",
+			"label": "A bool value that determines if to bind to a specific IP and Port (a false value binds to all IPs)",
+			"type": "bool",
+			"defaultValue": "false"
+		},
+		{
+			"name": "BROKER_BIND",
+			"label": "A bool value that determines if to bind to a specific IP and Port (a false value binds to all IPs)",
+			"type": "bool",
+			"defaultValue": "false"
+		},
+
+		{
+			"name": "DB_TYPE",
+			"label": "Physical database type (sqlite or psql)",
+			"type": "string",
+			"defaultValue": "sqlite"
+		},
+		{
+			"name": "DB_USER",
+			"label": "Username for SQL database connection",
+			"type": "string",
+			"defaultValue": ""
+		},
+		{
+			"name": "DB_PASSWD",
+			"label": "Password correlated to database user",
+			"type": "string",
+			"defaultValue": ""
+		},
+		{
+			"name": "DB_IP",
+			"label": "Database IP address",
+			"type": "string",
+			"defaultValue": "127.0.0.1"
+		},
+		{
+			"name": "DB_IP",
+			"label": "Database port number",
+			"type": "int",
+			"defaultValue": "5432"
+		},
+		{
+			"name": "AUTOCOMMIT",
+			"label": "Whether to set autocommit data",
+			"type": "bool",
+			"defaultValue": "false"
+		},
+
+		{
+			"name": "LEDGER_CONN",
+			"label": "TCP connection information for Master Node",
+			"type": "string",
+			"defaultValue": "127.0.0.1:32048"
+	},
+
+		{
+			"name": "CLUSTER_NAME",
+			"label": "Owner of the cluster",
+			"type": "string",
+			"defaultValue": "company-cluster1"
+		},
+		{
+			"name": "DEFAULT_DBMS",
+			"label": "Logical database name",
+			"type": "string",
+			"defaultValue": "new_company"
+		},
+
+		{
+			"name": "ENABLE_MQTT",
+			"label": "Whether to enable the default MQTT process",
+			"type": "bool",
+			"defaultValue": "false"
+		},
+		{
+			"name": "MQTT_BROKER",
+			"label": "IP address of MQTT broker",
+			"type": "string",
+			"defaultValue": "139.144.46.246"
+		},
+		{
+			"name": "MQTT_PORT",
+			"label": "Port associated with MQTT broker",
+			"type": "int",
+			"defaultValue": "1883"
+		},
+		{
+			"name": "MQTT_USER",
+			"label": "User associated with MQTT broker",
+			"type": "string",
+			"defaultValue": "anyloguser"
+		},
+		{
+			"name": "MQTT_PASSWD",
+			"label": "Password associated with MQTT user",
+			"type": "string",
+			"defaultValue": "mqtt4AnyLog!"
+		},
+
+		{
+			"name": "MQTT_LOG",
+			"label": "Whether to enable MQTT logging process",
+			"type": "bool",
+			"defaultValue": "false"
+		},
+
+		{
+			"name": "MSG_TOPIC",
+			"label": "Topic to get data for",
+			"type": "string",
+			"defaultValue": "anylog-demo"
+		},
+		{
+			"name": "MSG_DBMS",
+			"label": "Logical database name",
+			"type": "string",
+			"defaultValue": "new_company"
+		},
+		{
+			"name": "MSG_TABLE",
+			"label": "Table where to store data",
+			"type": "string",
+			"defaultValue": "bring [table]"
+		},
+		{
+			"name": "MSG_TIMESTAMP_COLUMN",
+			"label": "Timestamp column name",
+			"type": "string",
+			"defaultValue": "bring [timestamp]"
+		},
+		{
+			"name": "MSG_VALUE_COLUMN",
+			"label": "Value column name",
+			"type": "string",
+			"defaultValue": "bring [value]"
+	},
+		{
+			"name": "MSG_VALUE_COLUMN_TYPE",
+			"label": "Value column type",
+			"type": "string",
+			"defaultValue": "float"
+		},
+
+		{
+			"name": "DEPLOY_LOCAL_SCRIPT",
+			"label": "Whether to automatically run a local (or personalized) script at the end of the process",
+			"type": "bool",
+			"defaultValue": "false"
+		}
+	],
+	"deployment": {
+		"services": {
+			"$SERVICE_NAME": {
+				"image": "${DOCKER_IMAGE_BASE}:${DOCKER_IMAGE_VERSION}",
+				"ports": [
+					{"HostIP":  "0.0.0.0", "HostPort":  "32048:32048"},
+					{"HostIP":  "0.0.0.0", "HostPort":  "32049:32049"},
+					{"HostIP":  "0.0.0.0", "HostPort":  "32348:32348"},
+					{"HostIP":  "0.0.0.0", "HostPort":  "32349:32349"},
+					{"HostIP":  "0.0.0.0", "HostPort":  "32148:32148"},
+					{"HostIP":  "0.0.0.0", "HostPort":  "32149:32149"},
+					{"HostIP":  "0.0.0.0", "HostPort":  "32150:32150"},
+					{"HostIP":  "0.0.0.0", "HostPort":  "32548:32548"},
+					{"HostIP":  "0.0.0.0", "HostPort":  "32549:32549"},
+					{"HostIP":  "0.0.0.0", "HostPort":  "32550:32550"}
+				],
+				"binds": [
+					"${EDGELAKE_VOLUME}:/app/AnyLog-Network/anylog",
+					"${BLOCKCHAIN_VOLUME}:/app/AnyLog-Network/blockchain",
+					"${DATA_VOLUME}:/app/AnyLog-Network/data",
+					"${LOCAL_SCRIPTS}:/app/deployment-scripts"
+				]
+			}
+		}
+   }
+}

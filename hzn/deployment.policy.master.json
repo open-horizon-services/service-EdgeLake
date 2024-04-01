@@ -1,0 +1,50 @@
+{
+    "label": "$SERVICE_NAME Deployment Policy",      
+    "description": "Policy to auto deploy $SERVICE_NAME",
+    "service": {       
+      "name": "$SERVICE_NAME",
+      "org": "$HZN_ORG_ID",    
+      "arch": "*",    
+      "serviceVersions": [ 
+        {
+          "version": "$SERVICE_VERSION",
+          "priority":{}
+        }
+      ]
+    },
+    "properties": [
+    ],
+    "constraints": [
+      "purpose == edgelake-master",
+      "openhorizon.allowPrivileged == true"
+    ], 
+    "userInput": [ 
+      {            
+        "serviceOrgid": "$HZN_ORG_ID",
+        "serviceUrl": "$SERVICE_NAME",
+        "serviceVersionRange": "[0.0.0,INFINITY)",
+        "inputs": [
+          {"name":"NODE_TYPE","value":"master"},
+          {"name":"NODE_NAME","value":"edgelake-master"},
+          {"name":"COMPANY_NAME","value":"New Company"},
+
+          {"name":"ANYLOG_SERVER_PORT","value":"32048"},
+          {"name":"ANYLOG_REST_PORT","value":"32049"},
+          {"name":"TCP_BIND","value":"false"},
+          {"name":"REST_BIND","value":"false"},
+
+          {"name":  "DB_TYPE", "value":  "sqlite"},
+          {"name":  "DB_USER", "value":  ""},
+          {"name":  "DB_PASSWD", "value":  ""},
+          {"name":  "DB_IP", "value":  "127.0.0.1"},
+          {"name":  "DB_PORT", "value":  "5432"},
+          {"name":  "AUTOCOMMIT", "value":  "false"},
+
+          {"name":"LEDGER_CONN","value":"127.0.0.1:32048"},
+
+          {"name":"DEPLOY_LOCAL_SCRIPT","value":"false"}
+
+        ]
+      }
+    ]
+}  

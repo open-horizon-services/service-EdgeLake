@@ -1,0 +1,6 @@
+{
+  "properties": [
+    { "name": "example", "value": "edgelake-service" }
+  ],
+  "constraints": []
+}
