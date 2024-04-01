@@ -55,7 +55,9 @@ Queries are processed by issuing a query to the Query Node, the Query Node is us
   
 This setup hosts the KubeArmor data at the edge and satisfies queries without centralizing the data. 
 
-<img src="../imgs/kubearmor_anylog_diagram.png" height="20%" width="20%" /> 
+<div align="center">
+    <img align="center" src="../imgs/kubearmor_anylog_diagram.png" height="20%" width="20%" />
+</div>
 
 ## Support Links 
 * [Installing EdgeLake](Deploy_EdgeLake.md) - Steps to deploy EdgeLake via _OpenHorizon_ or _docker-compose_ 
