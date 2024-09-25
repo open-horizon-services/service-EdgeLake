@@ -1,0 +1,28 @@
+services:
+  edgelake-master:
+    image: anylogco/edgelake:1.3.2408
+    restart: always
+    env_file:
+      - edgelake_master.env
+    container_name: edgelake-master
+    stdin_open: true
+    tty: true
+    networks:
+      hzn_horizonnet:
+    ports:
+      - 32048:32048
+      - 32049:32049
+    volumes:
+      - edgelake-master-anylog:/app/AnyLog-Network/anylog
+      - edgelake-master-blockchain:/app/AnyLog-Network/blockchain
+      - edgelake-master-data:/app/AnyLog-Network/data
+      - edgelake-master-local-scripts:/app/deployment-scripts
+volumes:
+  edgelake-master-anylog:
+  edgelake-master-blockchain:
+  edgelake-master-data:
+  edgelake-master-local-scripts:
+networks:
+  hzn_horizonnet:
+    external: true
+

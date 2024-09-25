@@ -60,7 +60,7 @@ This setup hosts the KubeArmor data at the edge and satisfies queries without ce
 </div>
 
 ## Support Links 
-* [Installing EdgeLake](../README.md) - Steps to deploy EdgeLake via _OpenHorizon_ or _docker-compose_ 
+* [Installing EdgeLake](Deploy_EdgeLake.md) - Steps to deploy EdgeLake via _OpenHorizon_ or _docker-compose_ 
 * [Integrating EdgeLake-KubeArmor](EdgeLake_KubeArmor_integration.md) - EdgeLake-KubeArmor Integration Instructions
 * [Generating Grafana for KubeArmor data](Import_Grafana_Dashboards.md)
 

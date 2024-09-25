@@ -16,7 +16,7 @@ HZN_LISTEN_IP=[MAACHINE_IP] >> ~/.bashrc
 source ~/.bashrc 
 ```
 
-2. Start OpenHorizon via cURL - details can be found in [index](Install_Local_OpenHorizon_index.md)
+2. Start OpenHorizon via cURL - details can be found in [index](Install_OpenHorizon_index.md)
 ```shell
 for cmd in update upgrade ; do 
   sudo apt-get -y ${cmd}

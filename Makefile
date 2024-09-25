@@ -11,13 +11,13 @@ endif
 export DOCKER_IMAGE_BASE ?= anylogco/edgelake
 export DOCKER_IMAGE_NAME ?= edgelake
 export DOCKER_HUB_ID ?= anylogco
-export DOCKER_IMAGE_VERSION := 1.3.2408-beta9
+export DOCKER_IMAGE_VERSION := 1.3.2408
 
 # Open Horizon Configs
 export HZN_ORG_ID ?= myorg
 export HZN_LISTEN_IP ?= 127.0.0.1
 export SERVICE_NAME ?= service-edgelake-$(EDGELAKE_TYPE)
-export SERVICE_VERSION ?= 1.3.2409
+export SERVICE_VERSION ?= 1.3.2408
 export ARCH ?= $(shell hzn architecture)
 ifeq ($(ARCH), arm64)
 	export DOCKER_IMAGE_VERSION := 1.3.2407-beta2-arm64
@@ -32,7 +32,6 @@ export DATA_VOLUME := $(EDGELAKE_NODE_NAME)-data
 export LOCAL_SCRIPTS_VOLUME := $(EDGELAKE_NODE_NAME)-local-scripts
 export TCP_PORT := $(shell cat docker-makefiles/edgelake_${EDGELAKE_TYPE}.env | grep ANYLOG_SERVER_PORT | awk -F "=" '{print $$2}')
 export REST_PORT := $(shell cat docker-makefiles/edgelake_${EDGELAKE_TYPE}.env | grep ANYLOG_REST_PORT | awk -F "=" '{print $$2}')
-export BROKER_PORT := $(shell cat docker-makefiles/edgelake_${EDGELAKE_TYPE}.env | grep ANYLOG_BROKER_PORT | awk -F "=" '{print $$2}')
 
 # Env Variables
 include docker-makefiles/edgelake_${EDGELAKE_TYPE}.env
@@ -81,10 +80,6 @@ down: generate-docker-compose
 	@echo "Stopping EdgeLake with config file: edgelake_$(EDGELAKE_TYPE).env"
 	$(DOCKER_COMPOSE) -f docker-makefiles/docker-compose.yaml down
 	@$(MAKE) remove-docker-compose
-clean-volume: generate-docker-compose
-	@echo "Cleaning EdgeLake with config file: edgelake_$(EDGELAKE_TYPE).env"
-	@$(DOCKER_COMPOSE) -f docker-makefiles/docker-compose.yaml down -v
-	@$(MAKE) remove-docker-compose
 clean: generate-docker-compose
 	@echo "Cleaning EdgeLake with config file: edgelake_$(EDGELAKE_TYPE).env"
 	@$(DOCKER_COMPOSE) -f docker-makefiles/docker-compose.yaml down -v --rmi all
@@ -102,16 +97,14 @@ logs:
 	@docker logs $(EDGELAKE_NODE_NAME)
 
 publish: publish-service publish-service-policy publish-deployment-policy agent-run
-hzn-clean: hzn-clean remove-deployment-policy remove-service-policy remove-service
+hzn-clean: agent-stop remove-deployment-policy remove-service-policy remove-service
 
 # Pull, not push, Docker image since provided by third party
 publish-service:
 	@echo "=================="
 	@echo "PUBLISHING SERVICE"
 	@echo "=================="
-	@echo ${HZN_EXCHANGE_USER_AUTH}
-	@echo hzn exchange service publish --org=${HZN_ORG_ID} --user-pw=${HZN_EXCHANGE_USER_AUTH} -O -P --json-file=service.definition.json
-	@hzn exchange service publish --org=${HZN_ORG_ID} --user-pw=${HZN_EXCHANGE_USER_AUTH} -O -P --json-file=service.definition.json
+	@hzn exchange service publish -o ${HZN_ORG_ID} -u ${HZN_EXCHANGE_USER_AUTH} -O -P --json-file=service.definition.json
 	@echo ""
 remove-service:
 	@echo "=================="
@@ -124,7 +117,7 @@ publish-service-policy:
 	@echo "========================="
 	@echo "PUBLISHING SERVICE POLICY"
 	@echo "========================="
-	@hzn exchange service addpolicy --org=${HZN_ORG_ID} --user-pw=${HZN_EXCHANGE_USER_AUTH} -f service.policy.json $(HZN_ORG_ID)/$(SERVICE_NAME)_$(SERVICE_VERSION)_$(ARCH)
+	@hzn exchange service addpolicy -o ${HZN_ORG_ID} -u ${HZN_EXCHANGE_USER_AUTH} -f service.policy.json $(HZN_ORG_ID)/$(SERVICE_NAME)_$(SERVICE_VERSION)_$(ARCH)
 	@echo ""
 remove-service-policy:
 	@echo "======================="
@@ -137,15 +130,7 @@ publish-deployment-policy:
 	@echo "============================"
 	@echo "PUBLISHING DEPLOYMENT POLICY"
 	@echo "============================"
-	@if [ "$(EDGELAKE_TYPE)" = "operator" ] && [ -n "$(BROKER_PORT)" ]; then \
-            hzn exchange deployment addpolicy --org=$(HZN_ORG_ID) --user-pw=$(HZN_EXCHANGE_USER_AUTH) -f deployment-policies/operator_broker.json $(HZN_ORG_ID)/policy-$(SERVICE_NAME)_$(SERVICE_VERSION) ; \
-        elif [ "$(EDGELAKE_TYPE)" = "operator" ]; then \
-            hzn exchange deployment addpolicy --org=$(HZN_ORG_ID) --user-pw=$(HZN_EXCHANGE_USER_AUTH) -f deployment-policies/operator.json $(HZN_ORG_ID)/policy-$(SERVICE_NAME)_$(SERVICE_VERSION) ; \
-        elif [ -n "$(BROKER_PORT)" ]; then \
-            hzn exchange deployment addpolicy --org=$(HZN_ORG_ID) --user-pw=$(HZN_EXCHANGE_USER_AUTH) -f deployment-policies/generic_broker.json $(HZN_ORG_ID)/policy-$(SERVICE_NAME)_$(SERVICE_VERSION) ; \
-        else \
-            hzn exchange deployment addpolicy --org=$(HZN_ORG_ID) --user-pw=$(HZN_EXCHANGE_USER_AUTH) -f deployment-policies/generic.json $(HZN_ORG_ID)/policy-$(SERVICE_NAME)_$(SERVICE_VERSION) ; \
-        fi
+	@hzn exchange deployment addpolicy -o ${HZN_ORG_ID} -u ${HZN_EXCHANGE_USER_AUTH} -f deployment.policy.json $(HZN_ORG_ID)/policy-$(SERVICE_NAME)_$(SERVICE_VERSION)
 	@echo ""
 remove-deployment-policy:
 	@echo "=========================="
@@ -160,7 +145,7 @@ agent-run:
 	@echo "================"
 	@hzn register --policy=node.policy.json
 	@watch hzn agreement list
-hzn-clean:
+agent-stop:
 	@echo "==================="
 	@echo "UN-REGISTERING NODE"
 	@echo "==================="
@@ -189,4 +174,4 @@ help-open-horizon:
 	@echo "publish-deployment-policy  publish deployment policy to OpenHorizon"
 	@echo "remove-deployment-policy   remove deployment policy from OpenHorizon"
 	@echo "agent-run                  start OpenHorizon service"
-	@echo "hzn-clean                  stop OpenHorizon service"
+	@echo "agent-stop                  stop OpenHorizon service"

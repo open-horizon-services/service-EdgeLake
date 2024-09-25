@@ -12,9 +12,8 @@
 	"userInput": [
 		{
 			"name": "ANYLOG_PATH",
-			"label": "AnyLog dir path",
 			"type": "string",
-			"defaultValue": "/app"
+			"default": "/app"
 		},
 		{
 			"name": "INIT_TYPE",

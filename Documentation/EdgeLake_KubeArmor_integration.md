@@ -14,7 +14,7 @@ sudo python3 -m pip install grpcio-tools
 ## Prepare EdgeLake and KubeArmor
 
 1. Setup EdgeLake and KubeArmor on your machine
-   * [Deploy EdgeLake](../README.md#) 
+   * [Deploy AnyLog](Deploy_EdgeLake.md) 
    * [Deploy Kubearmor](https://docs.kubearmor.io/kubearmor/quick-links/deployment_guide) with proxy
 
 2. For _KubeArmor_, deploy a proxy service
