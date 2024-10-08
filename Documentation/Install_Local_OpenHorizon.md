@@ -10,10 +10,10 @@ The following installs Open Horizon locally
 
 ## Install Open Horizon 
 1. Update & execute `~/.bashrc`
-```
-echo MONGO_IMAGE_TAG=4.0.6 >> ~/.bashrc
-HZN_LISTEN_IP=[MAACHINE_IP] >> ~/.bashrc
-source ~/.bashrc 
+```shell
+export MONGO_IMAGE_TAG=4.0.6 >> ~/.bashrc 
+export HZN_LISTEN_IP=[MAACHINE_IP] >> ~/.bashrc
+source ~/.bashrc
 ```
 
 2. Start OpenHorizon via cURL - details can be found in [index](Install_Local_OpenHorizon_index.md)
