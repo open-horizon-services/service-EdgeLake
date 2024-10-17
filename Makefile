@@ -170,7 +170,13 @@ agent-run:
 	@echo "================"
 	@hzn register --policy=node.policy.json
 	@watch hzn agreement list
-hzn-clean:
+agent-stop:
+	@echo "===================="
+	@echo "Stop Registered NODE"
+	@echo "===================="
+	@hzn unregister -f
+	@echo ""
+hzn-clean: agent-stop remove-deployment-policy remove-service-policy remove-service
 	@echo "==================="
 	@echo "UN-REGISTERING NODE"
 	@echo "==================="
@@ -199,4 +205,5 @@ help-open-horizon:
 	@echo "publish-deployment-policy  publish deployment policy to OpenHorizon"
 	@echo "remove-deployment-policy   remove deployment policy from OpenHorizon"
 	@echo "agent-run                  start OpenHorizon service"
+	@echo "agent-stop				  stop Open Horizon service"
 	@echo "hzn-clean                  stop OpenHorizon service"
