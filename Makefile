@@ -177,11 +177,6 @@ agent-stop:
 	@hzn unregister -f
 	@echo ""
 hzn-clean: agent-stop remove-deployment-policy remove-service-policy remove-service
-	@echo "==================="
-	@echo "UN-REGISTERING NODE"
-	@echo "==================="
-	@hzn unregister -f
-	@echo ""
 help-docker:
 	@echo "====================="
 	@echo "Docker Deployment Options"
