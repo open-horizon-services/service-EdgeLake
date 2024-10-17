@@ -1,4 +1,7 @@
 #!/bin/bash
+cd ~/service-edgelake 
+make hzn-clean EDGELAKE_TYPE=operator
+
 IDS=$(curl -X GET 45.79.74.39:32049  -H 'command: blockchain get * where company="Open Horizon" bring [*][id] separator=" "')
 
 for ID in ${IDS} ; do
