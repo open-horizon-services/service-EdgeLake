@@ -11,7 +11,7 @@ endif
 export DOCKER_IMAGE_BASE ?= anylogco/edgelake
 export DOCKER_IMAGE_NAME ?= edgelake
 export DOCKER_HUB_ID ?= anylogco
-export DOCKER_IMAGE_VERSION := latest
+export DOCKER_IMAGE_VERSION ?= latest
 
 # Open Horizon Configs
 export HZN_ORG_ID ?= myorg
@@ -111,7 +111,7 @@ attach:
 logs:
 	@docker logs $(EDGELAKE_NODE_NAME)
 
-publish: publish-service publish-service-policy publish-deployment-policy agent-run
+publish: publish-service publish-service-policy publish-deployment-policy
 hzn-clean: hzn-clean remove-deployment-policy remove-service-policy remove-service
 
 # Pull, not push, Docker image since provided by third party
@@ -168,7 +168,7 @@ agent-run:
 	@echo "================"
 	@echo "REGISTERING NODE"
 	@echo "================"
-	@hzn register --policy=node.policy.json
+	@hzn register --name=hzn-client --policy=node.policy.json
 	@watch hzn agreement list
 hzn-clean:
 	@echo "==================="
